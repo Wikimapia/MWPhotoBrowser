@@ -661,7 +661,7 @@
     } else {
         id <MWPhoto> photo = [self photoAtIndex:index];
         if ([photo respondsToSelector:@selector(caption)]) {
-            if ([photo caption]) captionView = [[MWCaptionView alloc] initWithPhoto:photo];
+            if ([photo caption]) captionView = [[MWCaptionView alloc] initWithPhoto:photo delegate:self];
         }
     }
     captionView.alpha = [self areControlsHidden] ? 0 : 1; // Initial alpha
@@ -1586,6 +1586,24 @@
 		[alert show];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - MWPhotoActionsDelegate
+
+- (void)deleteButtonPressedForPhoto:(id<MWPhoto>)photo {
+    if (![self.delegate respondsToSelector:@selector(photoBrowser:deleteButtonPressedForPhotoAtIndex:)]) {
+        return;
+    }
+    
+    if (_actionsSheet) {
+        // Dismiss
+        [_actionsSheet dismissWithClickedButtonIndex:_actionsSheet.cancelButtonIndex animated:YES];
+    }
+    
+    // Only react when image has loaded
+    if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
+        [self.delegate photoBrowser:self deleteButtonPressedForPhotoAtIndex:_currentPageIndex];
+    }
 }
 
 @end

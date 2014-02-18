@@ -15,7 +15,8 @@
 // conforms to MWPhotoProtocol
 @interface MWPhoto : NSObject <MWPhoto>
 
-@property (nonatomic, strong) NSString *caption;
+@property (nonatomic, copy) NSString *caption;
+@property (nonatomic, assign) BOOL userGenerated;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) NSURL *photoURL;
 @property (nonatomic, readonly) NSString *filePath  __attribute__((deprecated("Use photoURL"))); // Depreciated

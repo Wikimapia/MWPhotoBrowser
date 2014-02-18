@@ -103,6 +103,7 @@
 		0E8515C917FCB05B00FE1EF3 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		0EA380321573EA4B003F4582 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0EFEA24B17FB08B400E451B6 /* MWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWCommon.h; path = Classes/MWCommon.h; sourceTree = SOURCE_ROOT; };
+		2AA1343218B37E980039DC0F /* MWPhotoActionsDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MWPhotoActionsDelegate.h; path = Classes/MWPhotoActionsDelegate.h; sourceTree = SOURCE_ROOT; };
 		4C6F96C414AF704100F8389A /* libMWPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMWPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6F96C714AF704100F8389A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C6F96CB14AF704100F8389A /* MWPhotoBrowser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -185,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				0EFEA24B17FB08B400E451B6 /* MWCommon.h */,
+				2AA1343218B37E980039DC0F /* MWPhotoActionsDelegate.h */,
 				4C6F96DA14AF70BD00F8389A /* MWPhotoBrowser.h */,
 				0E3D58D818047D0B0000E3A0 /* MWPhotoBrowserPrivate.h */,
 				4C6F96DB14AF70BD00F8389A /* MWPhotoBrowser.m */,

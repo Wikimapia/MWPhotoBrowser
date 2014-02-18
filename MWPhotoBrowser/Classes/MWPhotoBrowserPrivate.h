@@ -10,9 +10,10 @@
 #import "MBProgressHUD.h"
 #import "MWGridViewController.h"
 #import "MWZoomingScrollView.h"
+#import "MWPhotoActionsDelegate.h"
 
 // Declare private methods of browser
-@interface MWPhotoBrowser () {
+@interface MWPhotoBrowser () <MWPhotoActionsDelegate> {
     
 	// Data
     NSUInteger _photoCount;

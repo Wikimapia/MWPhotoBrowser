@@ -61,4 +61,7 @@
 // Cancel any background loading of image data
 - (void)cancelAnyLoading;
 
+// Indicates that is user-generated photo
+- (BOOL)userGenerated;
+
 @end

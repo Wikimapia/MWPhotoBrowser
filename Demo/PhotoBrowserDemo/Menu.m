@@ -163,6 +163,7 @@
             photo.caption = @"The London Eye is a giant Ferris wheel situated on the banks of the River Thames, in London, England.";
 			[photos addObject:photo];
             // Options
+            photo.userGenerated = YES;
             enableGrid = NO;
 			break;
 		case 1: {

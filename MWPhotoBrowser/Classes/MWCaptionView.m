@@ -11,21 +11,27 @@
 #import "MWPhoto.h"
 
 static const CGFloat labelPadding = 10;
+static const CGFloat deleteButtonWidth = 44.0;
 
 // Private
 @interface MWCaptionView () {
     id <MWPhoto> _photo;
-    UILabel *_label;    
+    UILabel *_label;
+    UIButton *_deleteButton;
 }
+
+@property (weak, readwrite, nonatomic) id<MWPhotoActionsDelegate> delegate;
+
 @end
 
 @implementation MWCaptionView
 
-- (id)initWithPhoto:(id<MWPhoto>)photo {
+- (id)initWithPhoto:(id<MWPhoto>)photo delegate:(id<MWPhotoActionsDelegate>)delegate {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 44)]; // Random initial frame
     if (self) {
         self.userInteractionEnabled = NO;
         _photo = photo;
+        self.delegate = delegate;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
             // Use iOS 7 blurry goodness
             self.barStyle = UIBarStyleBlackTranslucent;
@@ -45,16 +51,39 @@ static const CGFloat labelPadding = 10;
             [self setBackgroundImage:image forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
         }
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+        
+        if ([_photo userGenerated]) {
+            [self setupDeleteButton];
+        }
+        
         [self setupCaption];
     }
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGSize s = self.bounds.size;
+    
+    CGFloat maxWidth = s.width - labelPadding * 2;
+    if (_deleteButton) {
+        maxWidth -= deleteButtonWidth;
+    }
+
+    _label.frame = CGRectMake(labelPadding, 0, maxWidth, s.height);
+    _deleteButton.frame = CGRectMake(s.width - deleteButtonWidth, 0, deleteButtonWidth, s.height);
+}
+
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat maxHeight = 9999;
+    CGFloat maxWidth = size.width - labelPadding * 2;
+    if (_deleteButton) {
+        maxWidth -= deleteButtonWidth;
+    }
     if (_label.numberOfLines > 0) maxHeight = _label.font.leading*_label.numberOfLines;
     CGSize textSize = [_label.text sizeWithFont:_label.font 
-                              constrainedToSize:CGSizeMake(size.width - labelPadding*2, maxHeight)
+                              constrainedToSize:CGSizeMake(maxWidth, maxHeight)
                                   lineBreakMode:_label.lineBreakMode];
     return CGSizeMake(size.width, textSize.height + labelPadding * 2);
 }
@@ -82,5 +111,17 @@ static const CGFloat labelPadding = 10;
     [self addSubview:_label];
 }
 
+- (void)setupDeleteButton {
+    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_deleteButton setImage:[UIImage imageNamed:@"MWPhotoBrowser.bundle/images/UIBarButtonItemTrash.png"] forState:UIControlStateNormal];
+    [_deleteButton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_deleteButton];
+}
+
+- (void)deleteButtonAction {
+    if ([self.delegate respondsToSelector:@selector(deleteButtonPressedForPhoto:)]) {
+        [self.delegate deleteButtonPressedForPhoto:_photo];
+    }
+}
 
 @end
