@@ -89,7 +89,6 @@
     [self hideImageFailure];
     self.photo = nil;
     self.captionView = nil;
-    self.selectedButton = nil;
     _photoImageView.image = nil;
     _index = NSUIntegerMax;
 }

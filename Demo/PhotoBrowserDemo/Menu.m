@@ -153,9 +153,6 @@
     MWPhoto *photo;
     BOOL displayActionButton = YES;
     BOOL displaySelectionButtons = NO;
-    BOOL displayNavArrows = NO;
-    BOOL enableGrid = YES;
-    BOOL startOnGrid = NO;
 	switch (indexPath.row) {
 		case 0:
             // Photos
@@ -164,7 +161,6 @@
 			[photos addObject:photo];
             // Options
             photo.userGenerated = YES;
-            enableGrid = NO;
 			break;
 		case 1: {
             // Photos
@@ -181,7 +177,6 @@
             photo.caption = @"Campervan";
 			[photos addObject:photo];
             // Options
-            enableGrid = NO;
 			break;
         }
 		case 2: {
@@ -208,8 +203,6 @@
             photo = [MWPhoto photoWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"photo4t" ofType:@"jpg"]]];
 			[thumbs addObject:photo];
             // Options
-            startOnGrid = YES;
-            displayNavArrows = YES;
 			break;
         }
 		case 3:
@@ -235,8 +228,6 @@
             // Options
             displayActionButton = NO;
             displaySelectionButtons = YES;
-            startOnGrid = indexPath.row == 4;
-            enableGrid = NO;
 			break;
         }
 		case 5:
@@ -1004,8 +995,6 @@
             photo.caption = @"Mannequin DoF";
             [photos addObject:photo];
             [thumbs addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm2.static.flickr.com/1235/1010416375_fe91e5ce22_q.jpg"]]];
-            // Options
-            startOnGrid = YES;
 			break;
 		case 7: {
             @synchronized(_assets) {
@@ -1025,13 +1014,9 @@
 	// Create browser
 	MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.displayActionButton = displayActionButton;
-    browser.displayNavArrows = displayNavArrows;
-    browser.displaySelectionButtons = displaySelectionButtons;
     browser.alwaysShowControls = displaySelectionButtons;
     browser.wantsFullScreenLayout = YES;
     browser.zoomPhotosToFill = YES;
-    browser.enableGrid = enableGrid;
-    browser.startOnGrid = startOnGrid;
     [browser setCurrentPhotoIndex:0];
     
     // Reset selections
@@ -1103,16 +1088,6 @@
         return [_thumbs objectAtIndex:index];
     return nil;
 }
-
-//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
-//    MWPhoto *photo = [self.photos objectAtIndex:index];
-//    MWCaptionView *captionView = [[MWCaptionView alloc] initWithPhoto:photo];
-//    return [captionView autorelease];
-//}
-
-//- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
-//    NSLog(@"ACTION!");
-//}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
     NSLog(@"Did start viewing photo at index %lu", (unsigned long)index);
