@@ -28,10 +28,10 @@ Pod::Spec.new do |s|
     s.homepage = 'https://github.com/mwaterfall/MWPhotoBrowser'
     s.author = { 'Michael Waterfall' => 'michaelwaterfall@gmail.com' }
     s.source = {
-        :git => 'https://github.com/mwaterfall/MWPhotoBrowser.git',
+        :git => 'https://github.com/Wikimapia/MWPhotoBrowser.git',
         :tag => '1.2.1'
     }
-    s.platform = :ios, '5.1.1'
+    s.platform = :ios, '6.0'
     s.source_files = 'MWPhotoBrowser/Classes/*.{h,m}'
     s.resources = 'MWPhotoBrowser/MWPhotoBrowser.bundle'
     s.requires_arc = true
@@ -39,5 +39,4 @@ Pod::Spec.new do |s|
     s.dependency 'SDWebImage', '~> 3.5'
     s.dependency 'MBProgressHUD'
     s.dependency 'DACircularProgress'
-    s.dependency 'PSTCollectionView', '~> 1.2'
 end
