@@ -29,7 +29,7 @@ static const CGFloat deleteButtonWidth = 44.0;
 - (id)initWithPhoto:(id<MWPhoto>)photo delegate:(id<MWPhotoActionsDelegate>)delegate {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 44)]; // Random initial frame
     if (self) {
-        self.userInteractionEnabled = NO;
+        self.userInteractionEnabled = YES;
         _photo = photo;
         self.delegate = delegate;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7")) {
