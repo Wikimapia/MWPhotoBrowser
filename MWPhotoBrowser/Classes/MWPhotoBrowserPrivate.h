@@ -110,6 +110,10 @@
 - (void)loadAdjacentPhotosIfNecessary:(id<MWPhoto>)photo;
 - (void)releaseAllUnderlyingPhotos:(BOOL)preserveCurrent;
 
+// Progress
+- (void)showProgressHUDWithMessage:(NSString *)message;
+- (void)hideProgressHUD:(BOOL)animated;
+
 // Actions
 - (void)savePhoto;
 - (void)copyPhoto;
