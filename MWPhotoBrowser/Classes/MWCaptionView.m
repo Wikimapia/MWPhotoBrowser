@@ -82,9 +82,22 @@ static const CGFloat deleteButtonWidth = 44.0;
         maxWidth -= deleteButtonWidth;
     }
     if (_label.numberOfLines > 0) maxHeight = _label.font.leading*_label.numberOfLines;
-    CGSize textSize = [_label.text sizeWithFont:_label.font 
-                              constrainedToSize:CGSizeMake(maxWidth, maxHeight)
-                                  lineBreakMode:_label.lineBreakMode];
+
+    CGSize textSize;
+    if ([NSString instancesRespondToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
+        textSize = [_label.text boundingRectWithSize:CGSizeMake(size.width - labelPadding*2, maxHeight)
+                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:_label.font}
+                                             context:nil].size;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        textSize = [_label.text sizeWithFont:_label.font
+                           constrainedToSize:CGSizeMake(size.width - labelPadding*2, maxHeight)
+                               lineBreakMode:_label.lineBreakMode];
+#pragma clang diagnostic pop
+    }
+
     return CGSizeMake(size.width, textSize.height + labelPadding * 2);
 }
 

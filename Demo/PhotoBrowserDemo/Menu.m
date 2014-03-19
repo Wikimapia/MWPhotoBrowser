@@ -8,6 +8,7 @@
 
 #import "Menu.h"
 #import "SDImageCache.h"
+#import "MWCommon.h"
 
 @implementation Menu
 
@@ -23,7 +24,11 @@
         [[SDImageCache sharedImageCache] clearMemory];
         
         _segmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Push", @"Modal", nil]];
-        _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+        if (SYSTEM_VERSION_LESS_THAN(@"7")) {
+            _segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        }
+#endif
         _segmentedControl.selectedSegmentIndex = 0;
         [_segmentedControl addTarget:self action:@selector(segmentChange) forControlEvents:UIControlEventValueChanged];
         
@@ -44,6 +49,13 @@
 
 #pragma mark -
 #pragma mark View
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Test toolbar hiding
+//    [self setToolbarItems: @[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil]]];
+//    [[self navigationController] setToolbarHidden:NO animated:NO];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -1015,8 +1027,10 @@
 	MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     browser.displayActionButton = displayActionButton;
     browser.alwaysShowControls = displaySelectionButtons;
-    browser.wantsFullScreenLayout = YES;
     browser.zoomPhotosToFill = YES;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
+    browser.wantsFullScreenLayout = YES;
+#endif
     browser.enableSwipeToDismiss = YES;
     [browser setCurrentPhotoIndex:0];
     
