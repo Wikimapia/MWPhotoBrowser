@@ -162,7 +162,6 @@ MWPhotoBrowser very gratefully makes use of these other fantastic open source pr
 
 - [SDWebImage](https://github.com/rs/SDWebImage) by Olivier Poitrey — Used to handle downloading and decompressing of photos from the web.
 - [MBProgressHUD](https://github.com/jdg/MBProgressHUD) by Jonathan George — Used to display activity notifications.
-- [DACircularProgress](https://github.com/danielamitay/DACircularProgress) by Daniel Amitay — Used to display image download progress.
 
 Demo photos kindly provided by Oliver Waters (<http://twitter.com/oliverwaters>).
 
