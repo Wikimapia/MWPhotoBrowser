@@ -12,7 +12,7 @@
 #import "MWPhotoActionsDelegate.h"
 
 // Declare private methods of browser
-@interface MWPhotoBrowser () <MWPhotoActionsDelegate> {
+@interface MWPhotoBrowser () <MWPhotoEditDelegate> {
     
 	// Data
     NSUInteger _photoCount;

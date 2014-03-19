@@ -172,21 +172,25 @@
             photo.caption = @"The London Eye is a giant Ferris wheel situated on the banks of the River Thames, in London, England.";
 			[photos addObject:photo];
             // Options
-            photo.userGenerated = YES;
+            photo.editingStyle = MWPhotoEditingStyleDelete;
 			break;
 		case 1: {
             // Photos
             photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"photo5" ofType:@"jpg"]]];
             photo.caption = @"Fireworks";
+            photo.editingStyle = MWPhotoEditingStyleDelete;
 			[photos addObject:photo];
             photo = [MWPhoto photoWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"photo2" ofType:@"jpg"]]];
             photo.caption = @"The London Eye is a giant Ferris wheel situated on the banks of the River Thames, in London, England.";
+            photo.editingStyle = MWPhotoEditingStyleUndo;
 			[photos addObject:photo];
             photo = [MWPhoto photoWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"photo3" ofType:@"jpg"]]];
             photo.caption = @"York Floods";
+            photo.editingStyle = MWPhotoEditingStyleDelete;
 			[photos addObject:photo];
             photo = [MWPhoto photoWithImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"photo4" ofType:@"jpg"]]];
             photo.caption = @"Campervan";
+            photo.editingStyle = MWPhotoEditingStyleUndo;
 			[photos addObject:photo];
             // Options
 			break;

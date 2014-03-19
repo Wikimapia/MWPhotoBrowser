@@ -1303,8 +1303,8 @@
 
 #pragma mark - MWPhotoActionsDelegate
 
-- (void)deleteButtonPressedForPhoto:(id<MWPhoto>)photo {
-    if (![self.delegate respondsToSelector:@selector(photoBrowser:deleteButtonPressedForPhotoAtIndex:)]) {
+- (void)editButtonPressedForPhoto:(id<MWPhoto>)photo {
+    if (![self.delegate respondsToSelector:@selector(photoBrowser:editButtonPressedForPhotoAtIndex:)]) {
         return;
     }
     
@@ -1315,7 +1315,7 @@
     
     // Only react when image has loaded
     if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
-        [self.delegate photoBrowser:self deleteButtonPressedForPhotoAtIndex:_currentPageIndex];
+        [self.delegate photoBrowser:self editButtonPressedForPhotoAtIndex:_currentPageIndex];
     }
 }
 

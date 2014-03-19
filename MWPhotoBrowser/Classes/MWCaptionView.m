@@ -11,22 +11,22 @@
 #import "MWPhoto.h"
 
 static const CGFloat labelPadding = 10;
-static const CGFloat deleteButtonWidth = 44.0;
+static const CGFloat editButtonWidth = 44.0;
 
 // Private
 @interface MWCaptionView () {
     id <MWPhoto> _photo;
     UILabel *_label;
-    UIButton *_deleteButton;
+    UIButton *_editButton;
 }
 
-@property (weak, readwrite, nonatomic) id<MWPhotoActionsDelegate> delegate;
+@property (weak, readwrite, nonatomic) id<MWPhotoEditDelegate> delegate;
 
 @end
 
 @implementation MWCaptionView
 
-- (id)initWithPhoto:(id<MWPhoto>)photo delegate:(id<MWPhotoActionsDelegate>)delegate {
+- (id)initWithPhoto:(id<MWPhoto>)photo delegate:(id<MWPhotoEditDelegate>)delegate {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 44)]; // Random initial frame
     if (self) {
         self.userInteractionEnabled = YES;
@@ -52,8 +52,8 @@ static const CGFloat deleteButtonWidth = 44.0;
         }
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
         
-        if ([_photo userGenerated]) {
-            [self setupDeleteButton];
+        if ([_photo editingStyle] != MWPhotoEditingStyleNone) {
+            [self setupEditButtonWithStyle:[_photo editingStyle]];
         }
         
         [self setupCaption];
@@ -67,19 +67,19 @@ static const CGFloat deleteButtonWidth = 44.0;
     CGSize s = self.bounds.size;
     
     CGFloat maxWidth = s.width - labelPadding * 2;
-    if (_deleteButton) {
-        maxWidth -= deleteButtonWidth;
+    if (_editButton) {
+        maxWidth -= editButtonWidth;
     }
 
     _label.frame = CGRectMake(labelPadding, 0, maxWidth, s.height);
-    _deleteButton.frame = CGRectMake(s.width - deleteButtonWidth, 0, deleteButtonWidth, s.height);
+    _editButton.frame = CGRectMake(s.width - editButtonWidth, 0, editButtonWidth, s.height);
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat maxHeight = 9999;
     CGFloat maxWidth = size.width - labelPadding * 2;
-    if (_deleteButton) {
-        maxWidth -= deleteButtonWidth;
+    if (_editButton) {
+        maxWidth -= editButtonWidth;
     }
     if (_label.numberOfLines > 0) maxHeight = _label.font.leading*_label.numberOfLines;
 
@@ -124,16 +124,28 @@ static const CGFloat deleteButtonWidth = 44.0;
     [self addSubview:_label];
 }
 
-- (void)setupDeleteButton {
-    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_deleteButton setImage:[UIImage imageNamed:@"MWPhotoBrowser.bundle/images/UIBarButtonItemTrash.png"] forState:UIControlStateNormal];
-    [_deleteButton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_deleteButton];
+- (void)setupEditButtonWithStyle:(MWPhotoEditingStyle)editingStyle {
+    UIImage *image = nil;
+    switch (editingStyle) {
+        case MWPhotoEditingStyleDelete:
+            image = [UIImage imageNamed:@"MWPhotoBrowser.bundle/images/UIBarButtonItemTrash.png"];
+            break;
+        case MWPhotoEditingStyleUndo:
+            image = [UIImage imageNamed:@"MWPhotoBrowser.bundle/images/UIBarButtonItemUndo.png"];
+            break;
+        default:
+            break;
+    }
+    
+    _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_editButton setImage:image forState:UIControlStateNormal];
+    [_editButton addTarget:self action:@selector(editButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_editButton];
 }
 
-- (void)deleteButtonAction {
-    if ([self.delegate respondsToSelector:@selector(deleteButtonPressedForPhoto:)]) {
-        [self.delegate deleteButtonPressedForPhoto:_photo];
+- (void)editButtonAction {
+    if ([self.delegate respondsToSelector:@selector(editButtonPressedForPhoto:)]) {
+        [self.delegate editButtonPressedForPhoto:_photo];
     }
 }
 

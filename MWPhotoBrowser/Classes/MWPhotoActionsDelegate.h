@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MWPhotoActionsDelegate <NSObject>
+@protocol MWPhotoEditDelegate <NSObject>
 
 @optional
-- (void)deleteButtonPressedForPhoto:(id<MWPhoto>)photo;
+- (void)editButtonPressedForPhoto:(id<MWPhoto>)photo;
 
 @end

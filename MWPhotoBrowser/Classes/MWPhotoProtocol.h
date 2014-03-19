@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+// Photo editing style
+typedef NS_ENUM(NSInteger, MWPhotoEditingStyle) {
+    MWPhotoEditingStyleNone,
+    MWPhotoEditingStyleDelete,
+    MWPhotoEditingStyleUndo,
+};
+
 // Notifications
 #define MWPHOTO_LOADING_DID_END_NOTIFICATION @"MWPHOTO_LOADING_DID_END_NOTIFICATION"
 #define MWPHOTO_PROGRESS_NOTIFICATION @"MWPHOTO_PROGRESS_NOTIFICATION"
@@ -62,6 +69,6 @@
 - (void)cancelAnyLoading;
 
 // Indicates that is user-generated photo
-- (BOOL)userGenerated;
+- (MWPhotoEditingStyle)editingStyle;
 
 @end
