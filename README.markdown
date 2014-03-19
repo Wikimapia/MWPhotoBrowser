@@ -12,12 +12,12 @@ The browser can also be used to allow the user to select one or more photos usin
 
 [![Alt][screenshot1_thumb]][screenshot1]    [![Alt][screenshot2_thumb]][screenshot2]   [![Alt][screenshot5_thumb]][screenshot5]
 
-[screenshot1_thumb]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser1t.png
-[screenshot1]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser1.png
-[screenshot2_thumb]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser2t.png
-[screenshot2]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser2.png
-[screenshot5_thumb]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser5t.png
-[screenshot5]: https://raw.github.com/mwaterfall/MWPhotoBrowser/master/Preview/MWPhotoBrowser5.png
+[screenshot1_thumb]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser1t.png
+[screenshot1]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser1.png
+[screenshot2_thumb]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser2t.png
+[screenshot2]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser2.png
+[screenshot5_thumb]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser5t.png
+[screenshot5]: https://raw.github.com/Wikimapia/MWPhotoBrowser/master/Preview/MWPhotoBrowser5.png
 
 Works on iOS 6.0+. All strings are localisable so they can be used in apps that support multiple languages.
 
@@ -136,7 +136,7 @@ platform :ios, '7'
 
 ### Method 2: Static Library
 
-1. Get the latest source from GitHub by either [downloading as a zip file](https://github.com/Wikimapia/MWPhotoBrowser/zipball/master) or by cloning the repository at `git://github.com/mwaterfall/MWPhotoBrowser.git` and store the code wherever you wish.
+1. Get the latest source from GitHub by either [downloading as a zip file](https://github.com/Wikimapia/MWPhotoBrowser/zipball/master) or by cloning the repository at `git://github.com/Wikimapia/MWPhotoBrowser.git` and store the code wherever you wish.
 2. Right-click on the your project in the navigator, click "Add Files to 'Your Project'", and browse to and select "MWPhotoBrowser.xcodeproj"
 3. In your project's target settings, go to "Build Phases" -> "Link Binary With Libraries" and add `libMWPhotoBrowser.a`.
 4. Still in "Build Phases", drop down "Copy Bundle Resources" and drag the file `MWPhotoBrowser.bundle` from the MWPhotoBrowser project into that list. This ensures your project will include the required graphics for the photo browser to work correctly.
