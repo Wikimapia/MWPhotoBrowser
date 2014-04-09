@@ -552,8 +552,8 @@
 - (MWCaptionView *)captionViewForPhotoAtIndex:(NSUInteger)index {
     MWCaptionView *captionView = nil;
     id <MWPhoto> photo = [self photoAtIndex:index];
-    if ([photo respondsToSelector:@selector(caption)]) {
-        if ([photo caption]) captionView = [[MWCaptionView alloc] initWithPhoto:photo delegate:self];
+    if ([photo respondsToSelector:@selector(caption)] || [photo respondsToSelector:@selector(editingStyle)]) {
+        captionView = [[MWCaptionView alloc] initWithPhoto:photo delegate:self];
     }
     captionView.alpha = [self areControlsHidden] ? 0 : 1; // Initial alpha
     return captionView;
